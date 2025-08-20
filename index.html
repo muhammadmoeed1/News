@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Pulse - Latest News from Pakistan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo" data-page="home">
+                    <i class="fas fa-newspaper"></i>
+                    Pakistan Pulse
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="categories">Categories</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                </ul>
+                
+                <div class="nav-controls">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search for news..." id="search-input">
+                        <button id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="theme-toggle" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                
+                <div class="mobile-menu" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay">
+        <div class="mobile-nav">
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="categories">Categories</a></li>
+                <li><a href="#" data-page="about">About</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home-page">
+            <!-- Hero Slider -->
+            <div class="hero">
+                <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1566378246598-5b11a0d486cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="hero-content">
+                        <span class="category">Breaking News</span>
+                        <h2>Pakistan's Economic Growth Exceeds Expectations in 2023</h2>
+                        <p>Latest reports show significant improvement in key economic indicators despite global challenges</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="hero-slide" style="background-image: url('https://www.pcb.com.pk/timthumb.php?src=images/news_images/featured_images/cb303443a112.jpeg&w=675');">
+  <div class="hero-content">
+    <span class="category">Sports</span>
+    <h2>Pakistan Cricket Team Announces Squad for World Cup</h2>
+    <p>Selectors include promising newcomers alongside experienced veterans for the upcoming tournament</p>
+    <a href="#" class="read-more">Read More</a>
+  </div>
+</div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="hero-content">
+                        <span class="category">Technology</span>
+                        <h2>Pakistan's Tech Industry Sees Record Investments</h2>
+                        <p>Startups and established companies attract unprecedented funding in first half of 2023</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="hero-controls">
+                    <button id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Categories Filter -->
+            <div class="categories">
+                <h2 class="section-title">News Categories</h2>
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="general">General</button>
+                    <button class="category-btn" data-category="business">Business</button>
+                    <button class="category-btn" data-category="entertainment">Entertainment</button>
+                    <button class="category-btn" data-category="health">Health</button>
+                    <button class="category-btn" data-category="science">Science</button>
+                    <button class="category-btn" data-category="sports">Sports</button>
+                    <button class="category-btn" data-category="technology">Technology</button>
+                </div>
+            </div>
+
+            <!-- News Grid -->
+            <div class="content-wrapper">
+                <div class="main-content">
+                    <div class="loading" id="news-loading">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="news-grid" id="news-grid"></div>
+                    <div class="error-message" id="news-error" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load news articles. Please check your connection and try again.</p>
+                        <button class="retry-btn" id="retry-btn">Retry</button>
+                    </div>
+                    <div class="pagination" id="pagination">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Trending News</h3>
+                        <div class="trending-news">
+                            <div class="trending-item">
+                                <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Trending News" class="trending-img">
+                                <div class="trending-content">
+                                    <h4>Pakistan and IMF Reach Agreement on New Loan Program</h4>
+                                    <div class="news-meta">
+                                        <span>Dawn News</span>
+                                        <span>2 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <img src="https://images.unsplash.com/photo-1516972810927-80185027ca84?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Trending News" class="trending-img">
+                                <div class="trending-content">
+                                    <h4>Climate Change Impacts: Pakistan's Glacial Melt Accelerates</h4>
+                                    <div class="news-meta">
+                                        <span>Geo News</span>
+                                        <span>5 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="trending-item">
+                                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Trending News" class="trending-img">
+                                <div class="trending-content">
+                                    <h4>Tourism in Northern Areas Breaks All Previous Records</h4>
+                                    <div class="news-meta">
+                                        <span>The News</span>
+                                        <span>1 day ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Quick Links</h3>
+                        <div class="footer-links">
+                            <a href="#">Pakistan Politics</a>
+                            <a href="#">Stock Exchange</a>
+                            <a href="#">Weather Updates</a>
+                            <a href="#">Currency Rates</a>
+                            <a href="#">COVID-19 Updates</a>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Newsletter</h3>
+                        <p>Stay updated with our daily news digest</p>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button>Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div class="page" id="about-page">
+            <div class="page-content">
+                <h2 class="page-title">About Pakistan Pulse</h2>
+                <p class="page-text">Pakistan Pulse is your premier destination for the latest and most relevant news from across Pakistan. We are committed to delivering accurate, timely, and comprehensive coverage of events that matter to Pakistanis both at home and abroad.</p>
+                <p class="page-text">Our team of experienced journalists and editors work around the clock to bring you breaking news, in-depth analyses, and feature stories across a wide range of categories including politics, business, sports, entertainment, technology, and health.</p>
+                <p class="page-text">Founded in 2023, Pakistan Pulse has quickly established itself as a trusted source of news and information, with a commitment to journalistic integrity and impartial reporting.</p>
+                <p class="page-text">We believe in the power of information to transform societies and are dedicated to keeping our readers informed, engaged, and connected to the issues that shape our nation.</p>
+                
+                <div class="team-section">
+                    <h3>Our Team</h3>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Team Member">
+                            <h4>Ali Ahmed</h4>
+                            <p>Editor-in-Chief</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Team Member">
+                            <h4>Fatima Khan</h4>
+                            <p>Senior Journalist</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Team Member">
+                            <h4>Bilal Siddiqui</h4>
+                            <p>Technology Editor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div class="page" id="contact-page">
+            <div class="page-content">
+                <h2 class="page-title">Contact Us</h2>
+                <p class="page-text">We value your feedback, questions, and suggestions. Please feel free to reach out to us using the contact form below or through our contact information.</p>
+                
+                <div class="contact-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                    
+                    <div class="contact-info">
+                        <h3>Other Contact Methods</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@pakistanpulse.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+92 300 1234567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Press Club Building, F-6/1, Islamabad, Pakistan</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday-Friday: 9AM - 5PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pakistan Pulse</h3>
+                    <p>Your trusted source for the latest news and updates from across Pakistan and around the world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <div class="footer-links">
+                        <a href="#">Politics</a>
+                        <a href="#">Business</a>
+                        <a href="#">Sports</a>
+                        <a href="#">Entertainment</a>
+                        <a href="#">Technology</a>
+                        <a href="#">Health</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" data-page="home">Home</a>
+                        <a href="#" data-page="about">About Us</a>
+                        <a href="#" data-page="contact">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for daily news updates delivered directly to your inbox.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pakistan Pulse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
